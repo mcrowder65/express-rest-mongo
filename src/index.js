@@ -1,25 +1,14 @@
-import Hapi from "hapi";
+import express from "express";
+import bodyParser from "body-parser";
 
-const server = new Hapi.Server();
-server.connection({
-    host: "localhost",
-    port: 8000
-});
+import router from "./routes/routes";
 
-server.route({
-    method: "POST",
-    path: "/hello",
-    handler: function (request, reply) {
-        const {payload} = request;
-        console.log(payload);
-        reply({message: "hello!"});
-    }
-});
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(router);
 
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-    console.log("Server running at:", server.info.uri);
+const port = 3000;
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
 });

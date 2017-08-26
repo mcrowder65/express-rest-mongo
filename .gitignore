@@ -2,4 +2,10 @@ node_modules
 .idea/vcs.xml
 .idea/workspace.xml
 lib
-.idea
+.idea/*
+.idea*
+.idea/*.*
+.DS_Store
+.idea/services.iml
+.idea/watcherTasks.xml
+dist

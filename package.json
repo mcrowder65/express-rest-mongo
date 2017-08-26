@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d lib",
-    "start": "babel src -d lib && babel-watch lib/index.js -w src"
+    "start": "babel src -d lib && babel-watch lib/index.js -w src",
+    "debugger": "babel src -d lib && babel-node lib/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "babel-watch": "^2.0.7"
   },
   "dependencies": {
-    "hapi": "^16.5.2"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4"
   }
 }
