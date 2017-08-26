@@ -1,4 +1,5 @@
 import SqlConnectionManager from "../sql-connection-manager";
+import QueryBuilder from "../query-builder";
 
 const tableName = "users";
 const columns = [
@@ -11,7 +12,7 @@ const UserDao = {
     getAll: () => {
         const connection = SqlConnectionManager.getConnection();
         return new Promise((resolve, reject) => {
-            connection.query(`select ?? from ${tableName}`, columns, (error, results) => {
+            connection.query(QueryBuilder.select(tableName), columns, (error, results) => {
                 if (error) {
                     reject();
                 } else {
@@ -23,7 +24,7 @@ const UserDao = {
     getBy: obj => {
         const connection = SqlConnectionManager.getConnection();
         return new Promise((resolve, reject) => {
-            connection.query(`select ?? from ${tableName} where ?`,
+            connection.query(QueryBuilder.selectWhere(tableName),
                 [columns, obj], (error, results) => {
                     if (error) {
                         reject();

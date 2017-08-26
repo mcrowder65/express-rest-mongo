@@ -5,8 +5,12 @@ import UserDao from "../services/database/DAO/user-dao";
 
 const UserRoute = {
     getAll: async (req, res) => {
-        const users = await UserDao.getAll();
-        res.send(users);
+        try {
+            const users = await UserDao.getAll();
+            res.send(users);
+        } catch (error) {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+        }
     },
     getBy: async (req, res) => {
         if (Object.keys(req.body).length === 0) {
