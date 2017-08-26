@@ -1,12 +1,9 @@
+import UserDao from "../services/database/DAO/user-dao";
+
 const user = {
-    getUser: (req, res) => {
-
-        res.send({
-            body: req.body,
-            params: req.params,
-            query: req.query
-        });
-
+    getUser: async (req, res) => {
+        const users = await UserDao.getAll();
+        res.send(users);
     }
 };
 
