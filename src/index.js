@@ -10,5 +10,7 @@ app.use(router);
 
 const port = 3000;
 app.listen(port, () => {
+    /*eslint no-console: "off"*/
+    /*global console: true*/
     console.log(`Server started on port ${port}`);
 });

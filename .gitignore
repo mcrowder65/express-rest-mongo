@@ -6,6 +6,4 @@ lib
 .idea*
 .idea/*.*
 .DS_Store
-.idea/services.iml
-.idea/watcherTasks.xml
 dist
