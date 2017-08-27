@@ -6,7 +6,7 @@ import "babel-polyfill";
 import factory from "./factory";
 import router from "./routes/routes";
 /*eslint no-invalid-this: "off"*/
-export class ExpressRestMongo {
+class ExpressRestMongo {
     constructor(config) {
         if (!config.port) {
             throw new Error("port required");
@@ -43,3 +43,4 @@ export class ExpressRestMongo {
     }
 }
 
+export default ExpressRestMongo;
