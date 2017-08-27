@@ -2,15 +2,22 @@ import MongoConnectionManager from "./mongo-connection-manager";
 
 const MongoUtils = {
     doesCollectionExist: async collection => {
-        const db = await MongoConnectionManager.getConnection();
-        return new Promise(resolve => {
-            db.listCollections({name: collection}).next((err, collectionInfo) => {
-                if (collectionInfo) {
-                    resolve(true);
-                } else {
-                    resolve(false);
-                }
-            });
+        return new Promise(async (resolve, reject) => {
+            try {
+                const db = await MongoConnectionManager.getConnection();
+                db.listCollections({name: collection}).next((err, collectionInfo) => {
+                    if (err) {
+                        reject("Couldn't list collections");
+                    } else if (collectionInfo) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
+
+            } catch (error) {
+                reject(error);
+            }
 
         });
     },
@@ -20,10 +27,10 @@ const MongoUtils = {
             return false;
         } else {
             const db = await MongoConnectionManager.getConnection();
-            return new Promise(resolve => {
+            return new Promise((resolve, reject) => {
                 db.createCollection(collection, err => {
                     if (err) {
-                        resolve(false);
+                        reject(false);
                     } else {
                         resolve(true);
                     }
