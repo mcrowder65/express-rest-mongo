@@ -21,14 +21,14 @@ const BaseDao = {
             });
         });
     },
-    getBy: async (collection, obj, exclusion) => {
+    getBy: async (collection, obj) => {
         const db = await MongoConnectionManager.getConnection();
         obj = obj._id ? {
             ...obj,
             _id: new ObjectId(obj._id)
         } : obj;
         return new Promise((resolve, reject) => {
-            db.collection(collection).findOne(obj, (exclusion || {}), (err, result) => {
+            db.collection(collection).findOne(obj, (err, result) => {
                     if (err) {
                         reject(err);
                     } else {

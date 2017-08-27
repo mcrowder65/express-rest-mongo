@@ -1,7 +1,7 @@
 {
-  "name": "services",
-  "version": "1.0.0",
-  "description": "",
+  "name": "easy-mongo",
+  "version": "0.0.1",
+  "description": "Mongo prebaked with OAuth and a Rest API!",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/eslint/bin/eslint.js src",
@@ -28,7 +28,6 @@
     "express": "^4.15.4",
     "http-status-codes": "^1.2.0",
     "jsonwebtoken": "^7.4.3",
-    "mongodb": "^2.2.31",
-    "mysql": "^2.14.1"
+    "mongodb": "^2.2.31"
   }
 }
