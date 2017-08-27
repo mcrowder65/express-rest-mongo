@@ -1,7 +1,6 @@
 node_modules
 .idea/vcs.xml
 .idea/workspace.xml
-lib
 .idea/*
 .idea*
 .idea/*.*
