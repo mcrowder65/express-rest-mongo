@@ -31,7 +31,7 @@ Supported endpoints:
 
 To add custom routes, you can define a router and then import it in your config object as customRoutes<br>
 
-Example:
+Example (with ES6), see the example folder for the code:<br>
 index.js
 ```
 
