@@ -1,5 +1,5 @@
 {
-  "name": "easy-mongo",
+  "name": "express-rest-mongo",
   "version": "0.0.1",
   "description": "Mongo prebaked with OAuth and a Rest API!",
   "main": "index.js",
