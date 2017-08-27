@@ -6,15 +6,18 @@ import "babel-polyfill";
 import factory from "./factory";
 import router from "./routes/routes";
 /*eslint no-invalid-this: "off"*/
-const ExpressRestMongo = config => {
-    if (!config.port) {
-        throw new Error("port required");
-    }
-    this.port = config.port;
-    // TODO add custom routes
-    // this.customRoutes = config.customRoutes || {};
+class ExpressRestMongo {
+    constructor(config) {
+        if (!config.port) {
+            throw new Error("port required");
+        }
+        this.port = config.port;
+        // TODO add custom routes
+        // this.customRoutes = config.customRoutes || {};
 
-    this.run = () => {
+    }
+
+    run() {
         const app = express();
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: true}));
@@ -37,8 +40,7 @@ const ExpressRestMongo = config => {
             /*global console: true*/
             console.log(`Server started on port ${port}`);
         });
-    };
-
-};
+    }
+}
 
 export default ExpressRestMongo;
