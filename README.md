@@ -1,9 +1,10 @@
 # express-rest-mongo
 
 Express setup with Mongo that has basic authentication <br>
-built in with custom User endpoints. Exposes a mongo database as a rest api.
+built in with custom User endpoints. Exposes a mongo database as a rest api.<br>
+Define your server port number, your mongo port number, your mongo database <br>
+(which is generated dynamically if needed), and custom routes.
 
-To use this, install it, run a mongo server on a specified port and import it like so,
 ```
 const ExpressRestMongo = require("express-rest-mongo/lib/express-rest-mongo");
 const app = new ExpressRestMongo.default({
