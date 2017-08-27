@@ -6,7 +6,7 @@ Define your server port number, your mongo port number, your mongo database <br>
 (which is generated dynamically if needed), and custom routes.
 
 ```
-const ExpressRestMongo = require("express-rest-mongo/lib/express-rest-mongo");
+const ExpressRestMongo = require("express-rest-mongo");
 const app = new ExpressRestMongo.default({
     port: 3000,
     mongoPort: 27017,
