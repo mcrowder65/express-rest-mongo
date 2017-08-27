@@ -21,8 +21,8 @@ class ExpressRestMongo {
             throw new Error("mongoPort required");
         }
         this.mongoPort = config.mongoPort;
-        // TODO add custom routes
-        // this.customRoutes = config.customRoutes || {};
+
+        this.customRoutes = config.customRoutes;
 
     }
 
@@ -31,16 +31,17 @@ class ExpressRestMongo {
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: true}));
+        if (this.customRoutes) {
+            app.use(this.customRoutes);
+        }
         app.use(router);
         MongoConnectionManager.setUrl(this.mongoPort, this.db);
-
         app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");
                 const result = await factory(arr[0], arr[1], req.body);
                 res.send(result);
             } catch (error) {
-                console.log("error in root ", error);
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error.message);
             }
         });

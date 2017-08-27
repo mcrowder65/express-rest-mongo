@@ -7,7 +7,7 @@
   "scripts": {
     "test": "node_modules/eslint/bin/eslint.js src",
     "build": "babel src -d lib",
-    "start": "babel-watch src/runner.js -w src",
+    "example": "babel-watch example/index.js -w src",
     "prod": "npm run build && node lib/express-rest-mongo.js"
   },
   "author": "",
