@@ -65,3 +65,5 @@ export default CustomRoutes;
 
 This also supports overriding endpoints as well! So if for some reason you don't like the users/signin or users/signup <br>
 functionality, you can override it like so.
+
+By default, all routes are posts, if you want to change that then override the routes
