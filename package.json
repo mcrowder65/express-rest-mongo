@@ -1,6 +1,6 @@
 {
   "name": "express-rest-mongo",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Mongo prebaked with authentication and a Rest API!",
   "main": "index.js",
   "scripts": {
