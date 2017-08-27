@@ -30,4 +30,38 @@ Supported endpoints:
 - users/signup
 - users/updateById
 
-Next step is to add custom routing
+To add custom routes, you can define a router and then import it in your config object as customRoutes<br>
+
+Example:
+index.js
+```
+
+import ExpressRestMongo from "../src/express-rest-mongo";
+
+import CustomRoutes from "./custom-routes";
+
+const app = new ExpressRestMongo({
+    port: 3000,
+    db: "tempDb",
+    mongoPort: 27017,
+    customRoutes: CustomRoutes
+});
+
+app.run();
+
+```
+
+custom-routes.js
+```
+import express from "express";
+
+const CustomRoutes = new express.Router();
+
+CustomRoutes.route("/customers/create").post((req, res) => {
+    res.send("This is a custom route!");
+});
+export default CustomRoutes;
+```
+
+This also supports overriding endpoints as well! So if for some reason you don't like the users/signin or users/signup <br>
+functionality, you can override it like so.
