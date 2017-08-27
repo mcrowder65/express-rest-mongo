@@ -2,12 +2,10 @@ import mongo from "mongodb";
 
 const MongoClient = mongo.MongoClient;
 //TODO set db!!
-let mongoPort;
-let db;
-const url = `mongodb://localhost:${mongoPort}/${db}`;
+let url;
 const MongoConnectionManager = {
     getConnection: () => {
-        if (!mongoPort || !db) {
+        if (!url) {
             throw new Error("Mongo port and/or db not set!");
         }
         return new Promise((resolve, reject) => {
@@ -20,9 +18,8 @@ const MongoConnectionManager = {
             });
         });
     },
-    setUrl: (port, database) => {
-        mongoPort = port;
-        db = database;
+    setUrl: (mongoPort, db) => {
+        url = `mongodb://localhost:${mongoPort}/${db}`;
     }
 };
 
