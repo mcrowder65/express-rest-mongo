@@ -1,6 +1,6 @@
 {
   "name": "express-rest-mongo",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "url": "https://www.npmjs.com/package/express-rest-mongo",
   "description": "Mongo prebaked with authentication and a Rest API!",
   "main": "index.js",
