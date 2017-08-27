@@ -10,21 +10,13 @@ const jwt = {
     },
     verifyToken: token => {
         return new Promise((resolve, reject) => {
-            try {
-                jsonwebtoken.verify(token, SECRET, (err, decoded) => {
-                    try {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(decoded);
-                        }
-                    } catch (error) {
-                        reject(error);
-                    }
-                });
-            } catch (error) {
-                reject(error);
-            }
+            jsonwebtoken.verify(token, SECRET, (err, decoded) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(decoded);
+                }
+            });
         });
     }
 };

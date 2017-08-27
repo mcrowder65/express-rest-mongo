@@ -28,12 +28,12 @@ const BaseDao = {
         if (typeof collection !== "string") {
             throw new Error("Collection either not provided or is not a string");
         }
+        const db = await MongoConnectionManager.getConnection();
+        obj = obj._id ? {
+            ...obj,
+            _id: new ObjectId(obj._id)
+        } : obj;
         return new Promise(async (resolve, reject) => {
-            const db = await MongoConnectionManager.getConnection();
-            obj = obj._id ? {
-                ...obj,
-                _id: new ObjectId(obj._id)
-            } : obj;
             db.collection(collection).findOne(obj, (err, result) => {
                     if (err) {
                         reject("Couldn't findOne");
@@ -48,12 +48,12 @@ const BaseDao = {
         });
 
     },
-    create: (collection, obj) => {
+    create: async (collection, obj) => {
         if (typeof collection !== "string") {
             throw new Error("Collection either not provided or is not a string");
         }
+        const db = await MongoConnectionManager.getConnection();
         return new Promise(async (resolve, reject) => {
-            const db = await MongoConnectionManager.getConnection();
             db.collection(collection).insertOne(obj, (err, res) => {
                 if (err) {
                     reject(err);

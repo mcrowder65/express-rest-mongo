@@ -1,13 +1,13 @@
 {
   "name": "express-rest-mongo",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "url": "https://www.npmjs.com/package/express-rest-mongo",
   "description": "Mongo prebaked with authentication and a Rest API!",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/eslint/bin/eslint.js src",
     "build": "babel src -d lib",
-    "start": "babel-watch src/express-rest-mongo.js -w src",
+    "start": "babel-watch src/runner.js -w src",
     "prod": "npm run build && node lib/express-rest-mongo.js"
   },
   "author": "",

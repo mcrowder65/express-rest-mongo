@@ -1,7 +1,6 @@
 import mongo from "mongodb";
 
 const MongoClient = mongo.MongoClient;
-//TODO set db!!
 let url;
 const MongoConnectionManager = {
     getConnection: () => {
@@ -19,6 +18,11 @@ const MongoConnectionManager = {
         });
     },
     setUrl: (mongoPort, db) => {
+        if (!mongoPort) {
+            throw new Error("Mongo port must be provided");
+        } else if (!db) {
+            throw new Error("db must be set!");
+        }
         url = `mongodb://localhost:${mongoPort}/${db}`;
     }
 };

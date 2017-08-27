@@ -6,5 +6,5 @@ const router = new express.Router();
 
 router.route("/users/signup").post(UserRoute.signup);
 router.route("/users/signin").post(UserRoute.signin);
-
+router.route("/users/updateById").post(UserRoute.updateById);
 export default router;
