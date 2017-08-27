@@ -1,6 +1,7 @@
 import HttpStatus from "http-status-codes";
 import bcrypt from "bcrypt";
 
+import constants from "../constants/index";
 import jwt from "../utilities/jwt";
 import UserDao from "../database/DAO/user-dao";
 import BaseDao from "../database/DAO/base-dao";
@@ -63,7 +64,16 @@ const UserRoute = {
             if (decoded._id !== _id) {
                 res.status(HttpStatus.FORBIDDEN).send("You can\'t updateById someone else");
             } else {
-                await BaseDao.updateById("users", req.body);
+                let obj = req.body;
+                if (req.body.password) {
+                    const salt = bcrypt.genSaltSync(constants.SALT_ROUNDS);
+                    const hash = bcrypt.hashSync(req.body.password, salt);
+                    obj = {
+                        ...obj,
+                        password: hash
+                    };
+                }
+                await BaseDao.updateById("users", obj);
                 res.send("success");
             }
         } catch (error) {
