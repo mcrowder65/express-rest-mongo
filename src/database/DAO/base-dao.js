@@ -35,7 +35,6 @@ const BaseDao = {
                 _id: new ObjectId(obj._id)
             } : obj;
             db.collection(collection).findOne(obj, (err, result) => {
-                    console.log(err);
                     if (err) {
                         reject("Couldn't findOne");
                     } else {

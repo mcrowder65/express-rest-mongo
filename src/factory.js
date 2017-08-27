@@ -1,6 +1,6 @@
 import MongoUtils from "./database/mongo-utils";
 import BaseDao from "./database/DAO/base-dao";
-
+/*eslint max-statements: "off"*/
 const Factory = async (collection, query, obj) => {
     //TODO add authentication checks
     await MongoUtils.createCollectionIfNotExists(collection);
@@ -24,7 +24,7 @@ const Factory = async (collection, query, obj) => {
                 return "No id provided";
             } else {
                 await BaseDao.updateById(collection, obj);
-                const updatedObj = await BaseDao.getBy(collection, obj);
+                const updatedObj = await BaseDao.getBy(collection, {_id: obj._id});
                 return updatedObj;
             }
         }
@@ -33,7 +33,9 @@ const Factory = async (collection, query, obj) => {
                 return "No id provided";
             } else {
                 await BaseDao.removeById(collection, obj._id);
-                break;
+                return {
+                    message: "deleted!"
+                };
             }
         }
         default:
