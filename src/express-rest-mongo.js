@@ -3,7 +3,8 @@ import bodyParser from "body-parser";
 import HttpStatus from "http-status-codes";
 import "babel-polyfill";
 
-import defaults from "./constants/defaults";
+import constants from "./constants";
+import defaults from "./constants/config-defaults";
 import MongoConnectionManager from "./database/mongo-connection-manager";
 import factory from "./factory";
 import router from "./routes/routes";
@@ -48,6 +49,10 @@ class ExpressRestMongo {
         app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");
+                if (arr.length !== constants.AMOUNT_OF_PARAMS) {
+                    throw new Error(
+                        `Invalid request, need ${constants.AMOUNT_OF_PARAMS} parts in request`);
+                }
                 const result = await factory(arr[0], arr[1], req.body);
                 res.send(result);
             } catch (error) {
