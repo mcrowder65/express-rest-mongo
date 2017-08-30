@@ -6,22 +6,30 @@ import "babel-polyfill";
 import MongoConnectionManager from "./database/mongo-connection-manager";
 import factory from "./factory";
 import router from "./routes/routes";
-/*eslint no-invalid-this: "off"*/
 class ExpressRestMongo {
     constructor(config) {
         if (!config.port) {
-            throw new Error("port required");
+            console.log("RUNNING ON PORT 3000 SINCE PORT WAS NOT PROVIDED");
         }
-        this.port = config.port;
+        const port = 3000;
+        this.port = config.port || port;
+
         if (!config.db) {
             throw new Error("db required");
         }
-        this.db = config.db;
-        if (!config.mongoPort) {
-            throw new Error("mongoPort required");
-        }
-        this.mongoPort = config.mongoPort;
 
+        this.db = config.db;
+
+        if (!config.mongoPort) {
+            console.log("CONNECTING TO PORT 27017 FOR MONGO SINCE NONE SPECIFIED");
+        }
+        const defaultMongoPort = 27017;
+        this.mongoPort = config.mongoPort || defaultMongoPort;
+
+        if (!config.mongoIp) {
+            console.log("SETTING MONGO IP TO 127.0.0.1 SINCE NONE PROVIDED");
+        }
+        this.mongoIp = config.mongoIp || "127.0.0.1";
         this.customRoutes = config.customRoutes;
 
     }
@@ -35,7 +43,7 @@ class ExpressRestMongo {
             app.use(this.customRoutes);
         }
         app.use(router);
-        MongoConnectionManager.setUrl(this.mongoPort, this.db);
+        MongoConnectionManager.setUrl(this.mongoPort, this.db, this.mongoIp);
         app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");

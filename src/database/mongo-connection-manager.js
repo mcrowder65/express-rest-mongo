@@ -17,13 +17,15 @@ const MongoConnectionManager = {
             });
         });
     },
-    setUrl: (mongoPort, db) => {
+    setUrl: (mongoPort, db, mongoUrl) => {
         if (!mongoPort) {
             throw new Error("Mongo port must be provided");
         } else if (!db) {
             throw new Error("db must be set!");
+        } else if (!mongoUrl) {
+            throw new Error("Mongo url must be set!");
         }
-        url = `mongodb://localhost:${mongoPort}/${db}`;
+        url = `mongodb://${mongoUrl}:${mongoPort}/${db}`;
     }
 };
 
