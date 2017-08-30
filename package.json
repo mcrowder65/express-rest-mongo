@@ -4,6 +4,10 @@
   "url": "https://www.npmjs.com/package/express-rest-mongo",
   "description": "Mongo prebaked with authentication and a Rest API!",
   "main": "lib/express-rest-mongo.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcrowder65/express-rest-mongo"
+  },
   "scripts": {
     "test": "node_modules/eslint/bin/eslint.js src",
     "build": "babel src -d lib",
