@@ -3,16 +3,17 @@ import bodyParser from "body-parser";
 import HttpStatus from "http-status-codes";
 import "babel-polyfill";
 
+import defaults from "./constants/defaults";
 import MongoConnectionManager from "./database/mongo-connection-manager";
 import factory from "./factory";
 import router from "./routes/routes";
+
 class ExpressRestMongo {
     constructor(config) {
         if (!config.port) {
-            console.log("RUNNING ON PORT 3000 SINCE PORT WAS NOT PROVIDED");
+            console.log(`RUNNING ON PORT ${defaults.expressPort} SINCE PORT WAS NOT PROVIDED`);
         }
-        const port = 3000;
-        this.port = config.port || port;
+        this.port = config.port || defaults.expressPort;
 
         if (!config.db) {
             throw new Error("db required");
@@ -21,15 +22,15 @@ class ExpressRestMongo {
         this.db = config.db;
 
         if (!config.mongoPort) {
-            console.log("CONNECTING TO PORT 27017 FOR MONGO SINCE NONE SPECIFIED");
+            console.log(`CONNECTING TO PORT ${defaults.mongoPort} FOR MONGO SINCE NONE SPECIFIED`);
         }
-        const defaultMongoPort = 27017;
-        this.mongoPort = config.mongoPort || defaultMongoPort;
+        this.mongoPort = config.mongoPort || defaults.mongoPort;
 
         if (!config.mongoIp) {
-            console.log("SETTING MONGO IP TO 127.0.0.1 SINCE NONE PROVIDED");
+            console.log(`SETTING MONGO IP TO ${defaults.mongoIp} SINCE NONE PROVIDED`);
         }
-        this.mongoIp = config.mongoIp || "127.0.0.1";
+        this.mongoIp = config.mongoIp || defaults.mongoIp;
+
         this.customRoutes = config.customRoutes;
 
     }
