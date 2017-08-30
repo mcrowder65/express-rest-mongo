@@ -1,8 +1,8 @@
 # express-rest-mongo
 
-Express setup with Mongo that has basic authentication <br>
-built in with custom User endpoints. Exposes a mongo database as a rest api.<br>
-Define your server port number, your mongo port number, your mongo database <br>
+Express setup with Mongo that has basic authentication
+built in with custom User endpoints. Exposes a mongo database as a rest api.
+Define your server port number, your mongo port number, your mongo database 
 (which is generated dynamically if needed), and custom routes.
 
 ```
@@ -16,7 +16,8 @@ const app = new ExpressRestMongo.default({
 app.run();
 ```
 
-And, voila! You now have an app running on port 3000 with a full fledge database with basic CRUD endpoints setup<br>
+
+And, voila! You now have an app running on port 3000 with a full fledge database with basic CRUD endpoints setup
 for any collection you desire! <br>
 
 Supported endpoints:
@@ -30,9 +31,15 @@ Supported endpoints:
 - users/signup
 - users/updateById
 
-To add custom routes, you can define a router and then import it in your config object as customRoutes<br>
+Config options: 
+- port: The port your express server will run on, default 3000
+- db: The MongoDB database you will be reading/writing (required) 
+- mongoPort: The port of in which mongod is running on, default: 27017
+- mongoIp: The ip address of your mongo instance, default: 127.0.0.1
+- customRoutes: The custom routes you desire to create
+To add custom routes, you can define a router and then import it in your config object as customRoutes
 
-Example (with ES6), see the example folder for the code:<br>
+Example (with ES6), see the example folder for the code:
 index.js
 ```
 
