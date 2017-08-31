@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import HttpStatus from "http-status-codes";
+import path from "path";
 import "babel-polyfill";
 
 import constants from "./constants";
@@ -34,6 +35,7 @@ class ExpressRestMongo {
 
         this.customRoutes = config.customRoutes;
         this.collections = config.collections || [];
+        //TODO add html config location
     }
 
     run() {
@@ -46,6 +48,10 @@ class ExpressRestMongo {
         }
         app.use(router);
         MongoConnectionManager.setUrl(this.mongoPort, this.db, this.mongoIp);
+        app.get("/", (req, res) => {
+            /*global __dirname: true*/
+            res.sendfile(path.resolve(`${__dirname}/../index.html`));
+        });
         app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");
@@ -64,6 +70,8 @@ class ExpressRestMongo {
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error.message);
             }
         });
+
+
         const {port} = this;
         app.listen(port, () => {
             /*eslint no-console: "off"*/

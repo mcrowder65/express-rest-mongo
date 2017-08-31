@@ -1,6 +1,6 @@
 import MongoUtils from "./database/mongo-utils";
 import BaseDao from "./database/DAO/base-dao";
-import DbActionTypes from "../constants/db-action-types";
+import DbActionTypes from "./constants/db-action-types";
 /*eslint max-statements: "off"*/
 const Factory = async (collection, query, obj) => {
     //TODO add authentication checks
