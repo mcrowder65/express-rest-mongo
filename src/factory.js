@@ -1,25 +1,26 @@
 import MongoUtils from "./database/mongo-utils";
 import BaseDao from "./database/DAO/base-dao";
+import DbActionTypes from "../constants/db-action-types";
 /*eslint max-statements: "off"*/
 const Factory = async (collection, query, obj) => {
     //TODO add authentication checks
     await MongoUtils.createCollectionIfNotExists(collection);
     switch (query) {
-        case "getAll": {
+        case DbActionTypes.GET_ALL: {
 
             const res = await BaseDao.getAll(collection, obj);
             return res;
         }
-        case "getBy": {
+        case DbActionTypes.GET_BY: {
             const res = await BaseDao.getBy(collection, obj);
             return res;
         }
-        case "create": {
+        case DbActionTypes.CREATE: {
             const _id = await BaseDao.create(collection, obj);
             const newObj = await BaseDao.getBy(collection, {_id});
             return newObj;
         }
-        case "updateById": {
+        case DbActionTypes.UPDATE_BY_ID: {
             if (!obj._id) {
                 return "No id provided";
             } else {
@@ -28,7 +29,7 @@ const Factory = async (collection, query, obj) => {
                 return updatedObj;
             }
         }
-        case "removeById": {
+        case DbActionTypes.REMOVE_BY_ID: {
             if (!obj._id) {
                 return "No id provided";
             } else {

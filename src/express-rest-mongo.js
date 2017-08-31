@@ -54,10 +54,10 @@ class ExpressRestMongo {
                         `Invalid request, need ${constants.AMOUNT_OF_PARAMS} parts in request`);
                 }
                 const collection = arr[0];
-                const action = arr[1];
                 if (this.collections.length > 0 && this.collections.indexOf(collection) === -1) {
                     throw new Error(`${collection} is not in the list of collections`);
                 }
+                const action = arr[1];
                 const result = await factory(collection, action, req.body);
                 res.send(result);
             } catch (error) {
