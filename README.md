@@ -37,7 +37,7 @@ Config options:
 - mongoPort: The port of in which mongod is running on, default: 27017
 - mongoIp: The ip address of your mongo instance, default: 127.0.0.1
 - customRoutes: The custom routes you desire to create
-- collections: Array of strings which limits which collections can be read/written to, default: []
+- collections: Array of strings which limits which collections can be read/written to, default: []<br>
 To add custom routes, you can define a router and then import it in your config object as customRoutes
 
 Example (with ES6), see the example folder for the code:
