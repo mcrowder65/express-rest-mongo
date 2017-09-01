@@ -8,7 +8,8 @@ const app = new ExpressRestMongo({
     db: "tempDb",
     mongoPort: 27017,
     customRoutes: CustomRoutes,
-    collections: ["users", "companies", "employees"]
+    collections: ["users", "companies", "employees"],
+    indexLocation: "../html/index.html"
 });
 
 app.run();

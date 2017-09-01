@@ -36,6 +36,7 @@ class ExpressRestMongo {
         this.customRoutes = config.customRoutes;
         this.collections = config.collections || [];
         //TODO add html config location
+        this.indexLocation = config.indexLocation;
     }
 
     run() {
@@ -50,7 +51,7 @@ class ExpressRestMongo {
         MongoConnectionManager.setUrl(this.mongoPort, this.db, this.mongoIp);
         app.get("/", (req, res) => {
             /*global __dirname: true*/
-            res.sendfile(path.resolve(`${__dirname}/../index.html`));
+            res.sendfile(path.resolve(`${__dirname}/${this.indexLocation}`));
         });
         app.post("*", async (req, res) => {
             try {
