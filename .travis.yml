@@ -1,6 +1,8 @@
 language: node_js
-node_js: 6.3.1
+node_js: 6.11.2
 test:
   - npm test
 install:
   - npm install
+coveralls:
+  - npm run coveralls

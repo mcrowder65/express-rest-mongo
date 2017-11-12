@@ -21,7 +21,8 @@
     "build": "babel src -d lib",
     "example": "babel-watch example/index.js -w src",
     "prod": "npm run build && node lib/express-rest-mongo.js",
-    "mocha": "istanbul cover --include-all-sources --root src --report text --report lcov node_modules/mocha/bin/_mocha -- -c --opts mocha.opts test"
+    "mocha": "istanbul cover --include-all-sources --root src --report text --report lcov node_modules/mocha/bin/_mocha -- -c --opts mocha.opts test",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +43,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-watch": "^2.0.7",
     "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "eslint": "^4.5.0",
     "eslint-config-walmart": "^1.2.4",
     "eslint-plugin-filenames": "^1.2.0",
