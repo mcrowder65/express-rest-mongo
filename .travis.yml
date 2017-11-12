@@ -1,6 +1,7 @@
 language: node_js
 node_js: 6.11.2
-test:
-  - ./run-tests-and-publish.sh
 install:
   - npm install
+script:
+  - npm test
+    npm run coveralls
