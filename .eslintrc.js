@@ -1,3 +1,8 @@
 module.exports = {
-    "extends": "walmart"
+    "extends": ["walmart"],
+    "globals": {
+        "expect": "true",
+        "describe": "true",
+        "it": "true"
+    }
 };

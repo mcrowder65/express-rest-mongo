@@ -17,31 +17,34 @@
     "api"
   ],
   "scripts": {
-    "test": "eslint src",
+    "test": "eslint src && eslint test && npm run mocha",
     "build": "babel src -d lib",
     "example": "babel-watch example/index.js -w src",
-    "prod": "npm run build && node lib/express-rest-mongo.js"
+    "prod": "npm run build && node lib/express-rest-mongo.js",
+    "mocha": "istanbul cover --include-all-sources --root src --report text --report lcov node_modules/mocha/bin/_mocha -- -c --opts mocha.opts test"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "http-status-codes": "^1.2.0",
+    "jsonwebtoken": "^7.4.3",
+    "mongodb": "^2.2.31"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-watch": "^2.0.7",
+    "chai": "^4.1.2",
     "eslint": "^4.5.0",
-    "eslint-config-walmart": "^1.2.4"
-  },
-  "dependencies": {
-    "babel-eslint": "^7.2.3",
-    "babel-polyfill": "^6.26.0",
-    "bcrypt": "^1.0.3",
-    "body-parser": "^1.17.2",
+    "eslint-config-walmart": "^1.2.4",
     "eslint-plugin-filenames": "^1.2.0",
-    "express": "^4.15.4",
-    "http-status-codes": "^1.2.0",
-    "jsonwebtoken": "^7.4.3",
-    "mongodb": "^2.2.31"
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^4.0.1"
   }
 }
