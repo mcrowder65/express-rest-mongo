@@ -10,6 +10,7 @@ describe("test/utilities/jwt.spec.js", () => {
         expect(decodedToken._id).equal(_id);
     });
     it("try to verify a bad token", async () => {
+        //eslint-disable-next-line
         expect(Promise.resolve(jwt.verifyToken("asdf"))).to.be.rejected;
     });
 });
