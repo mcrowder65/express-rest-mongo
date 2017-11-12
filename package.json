@@ -17,7 +17,9 @@
     "api"
   ],
   "scripts": {
+    "pretest": "mongodb-runner start",
     "test": "eslint src && eslint test && npm run mocha",
+    "posttest": "mongodb-runner stop",
     "build": "babel src -d lib",
     "example": "babel-watch example/index.js -w src",
     "prod": "npm run build && node lib/express-rest-mongo.js",
@@ -52,6 +54,7 @@
     "eslint-config-walmart": "^1.2.4",
     "eslint-plugin-filenames": "^1.2.0",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "mongodb-runner": "^3.6.1"
   }
 }
