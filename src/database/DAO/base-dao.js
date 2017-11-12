@@ -77,6 +77,7 @@ const BaseDao = {
         };
         delete o.token;
         await BaseDao.create(collection, o);
+        return BaseDao.getBy(collection, o._id);
     },
     removeById: async (collection, _id) => {
         if (typeof collection !== "string") {
