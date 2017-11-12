@@ -17,7 +17,7 @@
     "api"
   ],
   "scripts": {
-    "test": "node_modules/eslint/bin/eslint.js src",
+    "test": "eslint src",
     "build": "babel src -d lib",
     "example": "babel-watch example/index.js -w src",
     "prod": "npm run build && node lib/express-rest-mongo.js"

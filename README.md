@@ -1,5 +1,6 @@
 # express-rest-mongo
-[![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url] 
+[![Build Status][travis-image]][travis-url]
 
 Express setup with Mongo that has basic authentication
 built in with custom User endpoints. Exposes a mongo database as a rest api.
@@ -81,3 +82,6 @@ By default, all routes are posts, if you want to change that then override the r
 
 [npm-image]: https://badge.fury.io/js/express-rest-mongo.svg
 [npm-url]: https://npmjs.org/package/express-rest-mongo
+
+[travis-image]: https://travis-ci.org/mcrowder65/express-rest-mongo.svg?branch=rm
+[travis-url]: https://travis-ci.org/mcrowder65/express-rest-mongo
