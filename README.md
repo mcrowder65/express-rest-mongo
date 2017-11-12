@@ -1,4 +1,5 @@
 # express-rest-mongo
+[![NPM version][npm-image]][npm-url]
 
 Express setup with Mongo that has basic authentication
 built in with custom User endpoints. Exposes a mongo database as a rest api.
@@ -76,3 +77,7 @@ functionality, you can override it like so.
 
 It's probably a good idea to override users/getAll so that it doesn't give all users to anyone who desires them.<br>
 By default, all routes are posts, if you want to change that then override the routes
+
+
+[npm-image]: https://badge.fury.io/js/express-rest-mongo.svg
+[npm-url]: https://npmjs.org/package/express-rest-mongo
