@@ -3,18 +3,18 @@ import MongoConnectionManager from "../mongo-connection-manager";
 const ObjectId = require("mongodb").ObjectId;
 //TODO is there a way to abstract the collection checks?
 const BaseDao = {
-    getAll: async (collection, obj, exclusion) => {
+    getAll: async (collection, obj, schema) => {
         if (typeof collection !== "string") {
             throw new Error("Collection either not provided or is not a string");
         }
         const db = await MongoConnectionManager.getConnection();
-        obj = obj._id ? {
+        obj = obj && obj._id ? {
             ...obj,
             _id: new ObjectId(obj._id)
         } : obj;
         return new Promise((resolve, reject) => {
             db.collection(collection).find((obj || {}),
-                (exclusion || {})).toArray((err, result) => {
+                (schema || {})).toArray((err, result) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -29,7 +29,7 @@ const BaseDao = {
             throw new Error("Collection either not provided or is not a string");
         }
         const db = await MongoConnectionManager.getConnection();
-        obj = obj._id ? {
+        obj = obj && obj._id ? {
             ...obj,
             _id: new ObjectId(obj._id)
         } : obj;
