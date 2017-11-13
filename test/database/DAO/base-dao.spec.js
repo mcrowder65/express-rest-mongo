@@ -31,6 +31,33 @@ describe("test/database/DAO/base-dao.spec.js", () => {
                 const result = await BaseDao.updateById(collection, {_id, hello});
                 expect(result).eql({_id, hello});
             });
+            it("create and get and update and delete", async () => {
+                const obj = {hello: "world"};
+                const collection = "hello";
+                const _id = await BaseDao.create(collection, {...obj});
+                const get = await BaseDao.getBy(collection, {_id});
+                expect(get).eql({...obj, _id});
+                const hello = "pickles";
+                const result = await BaseDao.updateById(collection, {_id, hello});
+                expect(result).eql({_id, hello});
+
+                await BaseDao.removeById(collection, _id);
+
+                const thisShouldBeEmpty = await BaseDao.getBy(collection, {_id});
+                expect(thisShouldBeEmpty).eql({});
+            });
+            it("create two and getAll", async () => {
+                const message = "This is a message!";
+                const collection = "uniqueCollection";
+
+                const objOne = {message};
+                const objTwo = {message};
+                const _idOne = await BaseDao.create(collection, {...objOne});
+                const _idTwo = await BaseDao.create(collection, {...objTwo});
+                const objs = await BaseDao.getAll(collection, {message});
+                expect(objs).eql([{...objOne, _id: _idOne}, {...objTwo, _id: _idTwo}]);
+
+            });
         });
 
     });
