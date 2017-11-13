@@ -1,13 +1,13 @@
 import BaseDao from "../../../src/database/DAO/base-dao";
 import MongoConnectionManager from "../../../src/database/mongo-connection-manager";
 import uniqueString from "unique-string";
+import configDefaults from "../../../src/constants/config-defaults";
 
 /*eslint-disable max-nested-callbacks*/
 /*eslint-disable no-unused-expressions*/
 describe("test/database/DAO/base-dao.spec.js", () => {
     before(() => {
-        //eslint-disable-next-line
-        MongoConnectionManager.setUrl(27017, "mydb", "localhost");
+        MongoConnectionManager.setUrl(configDefaults.mongoPort, "mydb", configDefaults.mongoIp);
     });
     describe("standard", async () => {
         it("create and get", async () => {

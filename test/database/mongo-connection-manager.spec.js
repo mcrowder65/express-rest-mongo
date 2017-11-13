@@ -1,12 +1,13 @@
 import MongoConnectionManager from "../../src/database/mongo-connection-manager";
+import configDefaults from "../../src/constants/config-defaults";
 
 /*eslint-disable max-nested-callbacks*/
 
 describe("test/database/mongo-connection-manager.spec.js", () => {
     describe("setUrl", () => {
-        const port = 27017;
-        const db = "mydb";
-        const mongoUrl = "localhost";
+        const port = configDefaults.expressPort;
+        const db = configDefaults.db;
+        const mongoUrl = configDefaults.mongoIp;
         it("port null", () => {
             expect(() => MongoConnectionManager.setUrl(null, db, mongoUrl)).to.throw();
         });

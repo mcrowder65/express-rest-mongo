@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "pretest": "mongodb-runner start",
-    "test": "eslint src && eslint test && npm run mocha",
+    "linter": "eslint src && eslint test",
+    "test": "npm run linter && npm run mocha",
     "posttest": "mongodb-runner stop",
     "build": "babel src -d lib",
     "example": "babel-watch example/index.js -w src",

@@ -54,7 +54,7 @@ const BaseDao = {
         }
         const db = await MongoConnectionManager.getConnection();
         return new Promise(async (resolve, reject) => {
-            db.collection(collection).insertOne(obj, (err, res) => {
+            db.collection(collection).insertOne({...obj}, (err, res) => {
                 if (err) {
                     reject(err);
                 } else {
