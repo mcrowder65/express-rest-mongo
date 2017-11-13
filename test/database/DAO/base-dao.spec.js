@@ -1,5 +1,7 @@
 import BaseDao from "../../../src/database/DAO/base-dao";
 import MongoConnectionManager from "../../../src/database/mongo-connection-manager";
+import uniqueString from "unique-string";
+
 /*eslint-disable max-nested-callbacks*/
 /*eslint-disable no-unused-expressions*/
 describe("test/database/DAO/base-dao.spec.js", () => {
@@ -10,14 +12,14 @@ describe("test/database/DAO/base-dao.spec.js", () => {
     describe("standard", async () => {
         it("create and get", async () => {
             const obj = {hello: "world"};
-            const collection = "hello";
+            const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
             expect(get).eql({...obj, _id});
         });
         it("create and get and update", async () => {
             const obj = {hello: "world"};
-            const collection = "hello";
+            const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
             expect(get).eql({...obj, _id});
@@ -27,7 +29,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         });
         it("create and get and update and delete", async () => {
             const obj = {hello: "world"};
-            const collection = "hello";
+            const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
             expect(get).eql({...obj, _id});
@@ -42,7 +44,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         });
         it("create two and getAll", async () => {
             const message = "This is a message!";
-            const collection = "uniqueCollection";
+            const collection = uniqueString();
 
             const objOne = {message};
             const objTwo = {message};
@@ -54,7 +56,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         });
         it("create two and getAll but ignore a field", async () => {
             const message = "This is a message!";
-            const collection = "uniqueCollection2";
+            const collection = uniqueString();
             const password = "this is my password!";
             const obj = {message, password};
             const _idOne = await BaseDao.create(collection, {...obj});
@@ -69,7 +71,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         //eslint-disable-next-line
         it("create two and getAll but ignore a field, getAll by one field but ignore that field", async () => {
             const message = "This is a message!";
-            const collection = "uniqueCollection3";
+            const collection = uniqueString();
             const password = "this is my password!";
             const obj = {message, password};
             const _idOne = await BaseDao.create(collection, {...obj});
@@ -83,7 +85,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         });
         it("create three and getAll with no input", async () => {
             const message = "This is a message!";
-            const collection = "uniqueCollection4";
+            const collection = uniqueString();
             const password = "this is my password!";
             const obj = {message, password};
             const _idOne = await BaseDao.create(collection, {...obj});
@@ -99,7 +101,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
         });
         it("create three and getAll with an _id", async () => {
             const message = "This is a message!";
-            const collection = "uniqueCollection5";
+            const collection = uniqueString();
             const password = "this is my password!";
             const obj = {message, password};
             const _id = await BaseDao.create(collection, {...obj});
@@ -111,7 +113,7 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             ]);
         });
         it("empty getAll", async () => {
-            const collection = "uniqueCollection6";
+            const collection = uniqueString();
             const objs = await BaseDao.getAll(collection);
             expect(objs).eql([]);
         });

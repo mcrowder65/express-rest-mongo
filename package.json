@@ -55,6 +55,7 @@
     "eslint-plugin-filenames": "^1.2.0",
     "istanbul": "^1.1.0-alpha.1",
     "mocha": "^4.0.1",
-    "mongodb-runner": "^3.6.1"
+    "mongodb-runner": "^3.6.1",
+    "unique-string": "^1.0.0"
   }
 }

@@ -4,6 +4,7 @@ module.exports = {
         "expect": "true",
         "describe": "true",
         "it": "true",
-        "before": "true"
+        "before": "true",
+        "after": "true"
     }
 };

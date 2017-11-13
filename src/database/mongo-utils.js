@@ -13,6 +13,7 @@ const MongoUtils = {
                     } else {
                         resolve(false);
                     }
+                    db.close();
                 });
 
             } catch (error) {
@@ -34,9 +35,8 @@ const MongoUtils = {
                     } else {
                         resolve(true);
                     }
+                    db.close();
                 });
-
-
             });
         }
     }
