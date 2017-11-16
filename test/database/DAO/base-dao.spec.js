@@ -9,7 +9,49 @@ describe("test/database/DAO/base-dao.spec.js", () => {
     beforeAll(() => {
         MongoConnectionManager.setUrl(configDefaults.mongoPort, "mydb", configDefaults.mongoIp);
     });
-    describe("standard", async () => {
+    describe("edge cases", () => {
+        test("getAll invalid collection type", async () => {
+            try {
+                await BaseDao.getAll(1);
+                expect(true).toEqual(false);
+            } catch (e) {
+                expect(e.message).toEqual("Collection either not provided or is not a string");
+            }
+        });
+        test("getBy invalid collection type", async () => {
+            try {
+                await BaseDao.getBy(1);
+                expect(true).toEqual(false);
+            } catch (e) {
+                expect(e.message).toEqual("Collection either not provided or is not a string");
+            }
+        });
+        test("create invalid collection type", async () => {
+            try {
+                await BaseDao.create(1);
+                expect(true).toEqual(false);
+            } catch (e) {
+                expect(e.message).toEqual("Collection either not provided or is not a string");
+            }
+        });
+        test("updateById invalid collection type", async () => {
+            try {
+                await BaseDao.updateById(1);
+                expect(true).toEqual(false);
+            } catch (e) {
+                expect(e.message).toEqual("Collection either not provided or is not a string");
+            }
+        });
+        test("removeById invalid collection type", async () => {
+            try {
+                await BaseDao.removeById(1);
+                expect(true).toEqual(false);
+            } catch (e) {
+                expect(e.message).toEqual("Collection either not provided or is not a string");
+            }
+        });
+    });
+    describe("standard", () => {
         test("create and get", async () => {
             const obj = {hello: "world"};
             const collection = uniqueString();
