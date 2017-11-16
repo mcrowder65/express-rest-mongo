@@ -4,15 +4,15 @@ import MongoConnectionManager from "../../../src/database/mongo-connection-manag
 import configDefaults from "../../../src/constants/config-defaults";
 
 describe("test/database/user-dao.spec.js", () => {
-    before(() => {
+    beforeAll(() => {
         MongoConnectionManager.setUrl(configDefaults.mongoPort, "mydb", configDefaults.mongoIp);
     });
-    it("create", async () => {
+    test("create", async () => {
         const username = "hello";
         const password = "world";
         const _id = await UserDao.create(username, password);
-        const user = await BaseDao.getBy("users", {username}, {username, _id});
-        expect({username: user.username, _id: user._id}).eql({username, _id});
+        const user = await BaseDao.getBy("users", {_id}, {username, _id});
+        expect({username: user.username, _id: user._id}).toEqual({username, _id});
     });
 });
 

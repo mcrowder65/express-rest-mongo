@@ -3,8 +3,8 @@ module.exports = {
     "globals": {
         "expect": "true",
         "describe": "true",
-        "it": "true",
-        "before": "true",
-        "after": "true"
+        "test": "true",
+        "beforeAll": "true",
+        "afterAll": "true"
     }
 };

@@ -6,43 +6,43 @@ import configDefaults from "../../../src/constants/config-defaults";
 /*eslint-disable max-nested-callbacks*/
 /*eslint-disable no-unused-expressions*/
 describe("test/database/DAO/base-dao.spec.js", () => {
-    before(() => {
+    beforeAll(() => {
         MongoConnectionManager.setUrl(configDefaults.mongoPort, "mydb", configDefaults.mongoIp);
     });
     describe("standard", async () => {
-        it("create and get", async () => {
+        test("create and get", async () => {
             const obj = {hello: "world"};
             const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
-            expect(get).eql({...obj, _id});
+            expect(get).toEqual({...obj, _id});
         });
-        it("create and get and update", async () => {
+        test("create and get and update", async () => {
             const obj = {hello: "world"};
             const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
-            expect(get).eql({...obj, _id});
+            expect(get).toEqual({...obj, _id});
             const hello = "pickles";
             const result = await BaseDao.updateById(collection, {_id, hello});
-            expect(result).eql({_id, hello});
+            expect(result).toEqual({_id, hello});
         });
-        it("create and get and update and delete", async () => {
+        test("create and get and update and delete", async () => {
             const obj = {hello: "world"};
             const collection = uniqueString();
             const _id = await BaseDao.create(collection, {...obj});
             const get = await BaseDao.getBy(collection, {_id});
-            expect(get).eql({...obj, _id});
+            expect(get).toEqual({...obj, _id});
             const hello = "pickles";
             const result = await BaseDao.updateById(collection, {_id, hello});
-            expect(result).eql({_id, hello});
+            expect(result).toEqual({_id, hello});
 
             await BaseDao.removeById(collection, _id);
 
             const thisShouldBeEmpty = await BaseDao.getBy(collection, {_id});
-            expect(thisShouldBeEmpty).eql({});
+            expect(thisShouldBeEmpty).toEqual({});
         });
-        it("create two and getAll", async () => {
+        test("create two and getAll", async () => {
             const message = "This is a message!";
             const collection = uniqueString();
 
@@ -51,10 +51,10 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             const _idOne = await BaseDao.create(collection, {...objOne});
             const _idTwo = await BaseDao.create(collection, {...objTwo});
             const objs = await BaseDao.getAll(collection, {message});
-            expect(objs).eql([{...objOne, _id: _idOne}, {...objTwo, _id: _idTwo}]);
+            expect(objs).toEqual([{...objOne, _id: _idOne}, {...objTwo, _id: _idTwo}]);
 
         });
-        it("create two and getAll but ignore a field", async () => {
+        test("create two and getAll but ignore a field", async () => {
             const message = "This is a message!";
             const collection = uniqueString();
             const password = "this is my password!";
@@ -62,14 +62,14 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             const _idOne = await BaseDao.create(collection, {...obj});
             const _idTwo = await BaseDao.create(collection, {...obj});
             const objs = await BaseDao.getAll(collection, {message}, {message});
-            expect(objs).eql([
+            expect(objs).toEqual([
                 {message: obj.message, _id: _idOne},
                 {message: obj.message, _id: _idTwo}
             ]);
 
         });
         //eslint-disable-next-line
-        it("create two and getAll but ignore a field, getAll by one field but ignore that field", async () => {
+        test("create two and getAll but ignore a field, getAll by one field but ignore that field", async () => {
             const message = "This is a message!";
             const collection = uniqueString();
             const password = "this is my password!";
@@ -77,13 +77,13 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             const _idOne = await BaseDao.create(collection, {...obj});
             const _idTwo = await BaseDao.create(collection, {...obj});
             const objs = await BaseDao.getAll(collection, {message}, {password});
-            expect(objs).eql([
+            expect(objs).toEqual([
                 {password: obj.password, _id: _idOne},
                 {password: obj.password, _id: _idTwo}
             ]);
 
         });
-        it("create three and getAll with no input", async () => {
+        test("create three and getAll with no input", async () => {
             const message = "This is a message!";
             const collection = uniqueString();
             const password = "this is my password!";
@@ -92,14 +92,14 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             const _idTwo = await BaseDao.create(collection, {...obj});
             const _idThree = await BaseDao.create(collection, {...obj});
             const objs = await BaseDao.getAll(collection);
-            expect(objs).eql([
+            expect(objs).toEqual([
                 {...obj, _id: _idOne},
                 {...obj, _id: _idTwo},
                 {...obj, _id: _idThree}
             ]);
 
         });
-        it("create three and getAll with an _id", async () => {
+        test("create three and getAll with an _id", async () => {
             const message = "This is a message!";
             const collection = uniqueString();
             const password = "this is my password!";
@@ -108,14 +108,14 @@ describe("test/database/DAO/base-dao.spec.js", () => {
             await BaseDao.create(collection, {...obj});
             await BaseDao.create(collection, {...obj});
             const objs = await BaseDao.getAll(collection, {_id});
-            expect(objs).eql([
+            expect(objs).toEqual([
                 {...obj, _id}
             ]);
         });
-        it("empty getAll", async () => {
+        test("empty getAll", async () => {
             const collection = uniqueString();
             const objs = await BaseDao.getAll(collection);
-            expect(objs).eql([]);
+            expect(objs).toEqual([]);
         });
     });
 
