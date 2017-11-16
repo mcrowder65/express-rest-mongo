@@ -10,7 +10,12 @@ import MongoConnectionManager from "./database/mongo-connection-manager";
 import factory from "./factory";
 import router from "./routes/routes";
 
+/*global console*/
+
+/*eslint-disable no-console*/
+
 class ExpressRestMongo {
+    //eslint-disable-next-line
     constructor(config) {
         if (!config.port) {
             console.log(`RUNNING ON PORT ${defaults.expressPort} SINCE PORT WAS NOT PROVIDED`);
@@ -37,23 +42,25 @@ class ExpressRestMongo {
         this.collections = config.collections || [];
         //TODO add html config location
         this.indexLocation = config.indexLocation;
+        this.app = null;
+        this.server = null;
     }
 
     run() {
-        const app = express();
+        this.app = express();
 
-        app.use(bodyParser.json());
-        app.use(bodyParser.urlencoded({extended: true}));
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({extended: true}));
         if (this.customRoutes) {
-            app.use(this.customRoutes);
+            this.app.use(this.customRoutes);
         }
-        app.use(router);
+        this.app.use(router);
         MongoConnectionManager.setUrl(this.mongoPort, this.db, this.mongoIp);
-        app.get("/", (req, res) => {
+        this.app.get("/", (req, res) => {
             /*global __dirname: true*/
             res.sendfile(path.resolve(`${__dirname}/${this.indexLocation}`));
         });
-        app.post("*", async (req, res) => {
+        this.app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");
                 if (arr.length !== constants.AMOUNT_OF_PARAMS) {
@@ -74,11 +81,12 @@ class ExpressRestMongo {
 
 
         const {port} = this;
-        app.listen(port, () => {
-            /*eslint no-console: "off"*/
-            /*global console: true*/
-            console.log(`Server started on port ${port}`);
-        });
+        // return new Promise(resolve => {
+        this.server = this.app.listen(port);
+    }
+
+    stop() {
+        this.server.close();
     }
 }
 
