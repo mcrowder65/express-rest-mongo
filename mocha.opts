@@ -1,6 +1,0 @@
---require mocha-setup.js
---reporter spec
---recursive
---ui bdd
---require babel-core/register
---require babel-polyfill

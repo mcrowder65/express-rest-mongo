@@ -1,10 +1,8 @@
 module.exports = {
     "extends": ["walmart"],
-    "globals": {
-        "expect": "true",
-        "describe": "true",
-        "it": "true",
-        "before": "true",
-        "after": "true"
+    "plugins": ["jest"],
+    "globals": {},
+    "env": {
+        "jest/globals": true
     }
 };

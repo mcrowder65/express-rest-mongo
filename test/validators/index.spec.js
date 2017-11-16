@@ -3,24 +3,24 @@ import {stringValidator} from "../../src/validators/index";
 describe("test/validators/index.spec.js", () => {
     describe("stringValidator", () => {
         describe("edge cases", () => {
-            it("undefined", () => {
-                expect(() => stringValidator(undefined)).to.throw();
+            test("undefined", () => {
+                expect(() => stringValidator(undefined)).toThrow();
             });
-            it("null", () => {
-                expect(() => stringValidator(null)).to.throw();
+            test("null", () => {
+                expect(() => stringValidator(null)).toThrow();
             });
-            it("1234", () => {
+            test("1234", () => {
                 const num = 1234;
-                expect(() => stringValidator(num)).to.throw();
+                expect(() => stringValidator(num)).toThrow();
             });
-            it("empty string", () => {
-                expect(() => stringValidator("")).to.throw();
+            test("empty string", () => {
+                expect(() => stringValidator("")).toThrow();
             });
         });
         describe("standard", () => {
-            it("asdf", () => {
+            test("asdf", () => {
                 const result = stringValidator("asdf");
-                expect(result).equal("asdf");
+                expect(result).toEqual("asdf");
             });
         });
     });
