@@ -40,8 +40,9 @@ class ExpressRestMongo {
 
         this.customRoutes = config.customRoutes;
         this.collections = config.collections || [];
-        //TODO add html config location
-        this.indexLocation = config.indexLocation;
+        //TODO add html config location to documentation
+        this.indexFile = config.indexFile;
+        this.buildFolder = config.buildFolder;
         this.app = null;
         this.server = null;
     }
@@ -54,12 +55,15 @@ class ExpressRestMongo {
         if (this.customRoutes) {
             this.app.use(this.customRoutes);
         }
+        /*global __dirname: true*/
+        this.app.use(express.static(path.resolve(__dirname, "../../..", "build")));
+
+        this.app.get("*", (req, res) => {
+            res.sendFile(path.resolve(__dirname, "../../..", "build", "index.html"));
+        });
         this.app.use(router);
         MongoConnectionManager.setUrl(this.mongoPort, this.db, this.mongoIp);
-        this.app.get("/", (req, res) => {
-            /*global __dirname: true*/
-            res.sendfile(path.resolve(`${__dirname}/${this.indexLocation}`));
-        });
+
         this.app.post("*", async (req, res) => {
             try {
                 const arr = req.originalUrl.split("/").filter(e => e !== "");
